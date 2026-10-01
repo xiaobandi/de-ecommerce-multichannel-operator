@@ -1,0 +1,105 @@
+apiVersion: digital-employee/v1
+kind: DigitalEmployee
+metadata:
+  id: de_ecommerce_multichannel_operator
+  name: 多平台铺货与库存同步
+  alias: 多平台运营助理·小铺
+  repo: de-ecommerce-multichannel-operator
+  card_no: 6.4-④
+  group: ecommerce
+  group_label: 电商商家
+  phase: P1 二期
+  complexity: M-L（连接器最多）
+  score: 高频5｜痛点4｜客单价4｜广度4｜价值4 ＝ **21/25**
+  price: 50-100 元/月（R3 付费矩阵接受度最高项）
+  channels:
+  - GitHub
+  - Dify Marketplace（DAG 编排天然契合）
+  - 淘宝（"铺货模板+映射表"SKU）
+  license: Proprietary
+  version: 1.0.0
+spec:
+  positioning: 多平台运营助理·小铺 ｜ 一人店的"轻量 ERP"，只做真正用的 20% 功能
+  users: 同时运营 2-4 个平台、SKU 20-500 的卖家
+  boundary: 做：Listing 生成、规格映射、库存水位监控、价格巡检；不做：自动改价、自动采购下单
+  kpi: 单款铺货耗时 90 分钟→15 分钟；超卖事故 = 0；价格异动发现 ≤1 小时
+  roi_summary: 替代 ERP ¥3000-10000/年（聚水潭 9.3 万客户 vs 2500 万卖家，据R3调研）+ 月省 26h≈¥780
+  demand_refs:
+  - D13
+  - D12
+  - D02
+  demand_support: 充分
+  demand_evidence: 中
+runtime:
+  system_prompt: persona/system-prompt.md
+  boundary: persona/boundary.md
+  kpi: persona/kpi.md
+deliverables:
+  skills:
+  - slug: category-attr-map
+    name: 类目属性映射
+    kind: private
+    path: skills/category-attr-map
+    version: 1.0.0
+    maturity: implemented
+  - slug: inventory-waterline-calc
+    name: 库存水位计算
+    kind: private
+    path: skills/inventory-waterline-calc
+    version: 1.0.0
+    maturity: contract-complete
+  - slug: oversell-alert
+    name: 超卖预警
+    kind: private
+    path: skills/oversell-alert
+    version: 1.0.0
+    maturity: contract-complete
+  workflows:
+  - slug: wf-ecom-ops-listing-gen
+    name: 一份资料多平台 Listing 生成
+    path: workflows/wf-ecom-ops-listing-gen
+    version: 1.0.0
+    phase: P1
+    calls:
+    - category-attr-map
+    - title-generator
+  - slug: wf-ecom-ops-spec-map
+    name: 规格/类目映射维护
+    path: workflows/wf-ecom-ops-spec-map
+    version: 1.0.0
+    phase: P1
+    calls:
+    - category-attr-map
+  - slug: wf-ecom-ops-inventory-sync
+    name: 库存同步与超卖预警
+    path: workflows/wf-ecom-ops-inventory-sync
+    version: 1.0.0
+    phase: P1
+    calls:
+    - inventory-waterline-calc
+    - oversell-alert
+  - slug: wf-ecom-ops-price-patrol
+    name: 竞品价格巡检
+    path: workflows/wf-ecom-ops-price-patrol
+    version: 1.0.0
+    phase: P1
+    calls:
+    - price-monitor
+  - slug: wf-ecom-ops-daily-report
+    name: 铺货日报
+    path: workflows/wf-ecom-ops-daily-report
+    version: 1.0.0
+    phase: P2
+    calls:
+    - brief-generator
+  knowledge_base: kb/
+  connectors: connectors/bindings.yaml
+external_dependencies:
+- repo: agent-skills-core
+  version: 1.0.0
+  skills:
+  - brief-generator
+  - price-monitor
+  - title-generator
+  resolution: external
+spec_only_dependencies: []
