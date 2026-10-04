@@ -1,0 +1,15 @@
+{
+  "name": "wf-ecom-ops-daily-report",
+  "title": "铺货日报",
+  "kind": "workflow",
+  "owner": "de-ecommerce-multichannel-operator",
+  "complexity": "S",
+  "phase": "P2",
+  "one_liner": "铺货/库存/价格汇总→日报",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

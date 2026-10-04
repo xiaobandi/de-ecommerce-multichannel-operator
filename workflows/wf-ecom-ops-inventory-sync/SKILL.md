@@ -1,53 +1,68 @@
 ---
-name: wf-ecom-ops-daily-report
+name: wf-ecom-ops-inventory-sync
 description: >-
-  多平台铺货与库存同步 的「铺货日报」工作流：铺货/库存/价格汇总→日报。触发方式：定时（每日 21:00）。
-  当用户要完成「铺货日报」这件事、或触发了上述条件时使用。
+  多平台铺货与库存同步 的「库存同步与超卖预警」工作流：各平台销量→水位计算→预警推送。触发方式：定时（每 15 分钟）。
+  当用户要完成「库存同步与超卖预警」这件事、或触发了上述条件时使用。
 license: Proprietary
+compatibility: >-
+  需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
+  跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:
   author: PLATFORM
   version: "1.0.0"
   standard: agent-skills/v1
+  library: agent-skills-library
   layer: L2-workflow
   owner: de_ecommerce_multichannel_operator
-  complexity: S
-  phase: P2
-  source: library
+  repo: de-ecommerce-multichannel-operator
+  visibility: private_to_employee
+  delivery: employee
+  complexity: L
+  phase: P1
+  source: new
 ---
 
-# 铺货日报
+# 库存同步与超卖预警
 
-> 归属：**多平台铺货与库存同步**（`de-ecommerce-multichannel-operator`）　触发：定时（每日 21:00）　
-> 复杂度 S　阶段 P2
+> 归属：**多平台铺货与库存同步**（`de-ecommerce-multichannel-operator`）　触发：定时（每 15 分钟）　
+> 复杂度 L　阶段 P1
 
 ## 一、这条工作流解决什么
 
-铺货/库存/价格汇总→日报
+各平台销量→水位计算→预警推送
 
-**业务收益**：月省统计 6h≈¥180
+**业务收益**：一次超卖事故损失＞年费
 
 ## 二、调用的 SKILL（必填列，逐条锁定版本）
 
 | 技能名 | slug | 来源仓 | 版本 |
 |---|---|---|---|
-| `简报生成` | `brief-generator` | core | v1.0.0 |
+| `库存水位计算` | `inventory-waterline-calc` | 本仓 | v1.0.0 |
+| `超卖预警` | `oversell-alert` | 本仓 | v1.0.0 |
 
 > 公共技能来自 `agent-skills-core@1.0.0`，本仓库只做外部依赖引用，
 > **不内联复制**其正文——这是三层仓库体系的硬规则，避免同一能力多份副本各自漂移。
 
 ## 三、执行步骤（每步四要素齐备）
 
-### 步骤 1：铺货/库存/价格汇总
+### 步骤 1：各平台销量
 
-- **做**：铺货/库存/价格汇总
+- **做**：各平台销量
 - **输入来源**：用户提供的原始材料（工作流第 1 步没有「上一步」）/ 本员工知识库 `kb/` / 连接器只读数据；三者皆空时必须停在 G1 闸门
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 
-### 步骤 2：日报
+### 步骤 2：水位计算
 
-- **做**：日报
+- **做**：水位计算
 - **输入来源**：步骤 1 的产出 / 本员工知识库 `kb/` / 连接器只读数据
+- **依据与结论**：把本步结论对应到具体输入项
+- **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
+
+### 步骤 3：预警推送
+
+- **做**：预警推送
+- **输入来源**：步骤 2 的产出 / 本员工知识库 `kb/` / 连接器只读数据
 - **依据与结论**：把本步结论对应到具体输入项
 - **未决 · 待填**：缺数据处写 `<待填>` 并给出获取方式
 

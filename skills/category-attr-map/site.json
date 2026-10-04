@@ -1,0 +1,15 @@
+{
+  "name": "category-attr-map",
+  "title": "类目属性映射",
+  "kind": "skill",
+  "owner": "de-ecommerce-multichannel-operator",
+  "complexity": "M",
+  "phase": "P1",
+  "one_liner": "跨平台类目/规格对照（商品属性→各平台映射）",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}

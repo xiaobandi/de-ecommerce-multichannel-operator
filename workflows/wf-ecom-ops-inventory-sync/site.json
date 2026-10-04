@@ -1,0 +1,15 @@
+{
+  "name": "wf-ecom-ops-inventory-sync",
+  "title": "库存同步与超卖预警",
+  "kind": "workflow",
+  "owner": "de-ecommerce-multichannel-operator",
+  "complexity": "L",
+  "phase": "P1",
+  "one_liner": "各平台销量→水位计算→预警推送",
+  "pages": [
+    "docs/使用手册.html",
+    "docs/使用示例.html",
+    "docs/用户场景.html",
+    "docs/架构与流程图.html"
+  ]
+}
