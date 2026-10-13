@@ -2,7 +2,7 @@
 name: category-attr-map
 description: >-
   把商品资料映射到各平台的类目与属性体系，产出一份资料多平台上架的映射表。当用户提到类目映射、属性映射、上架类目、多平台类目、category mapping、attribute mapping 时使用——即使用户没有直接说出上述关键词，只要意图吻合也应触发。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件。若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。
 metadata:

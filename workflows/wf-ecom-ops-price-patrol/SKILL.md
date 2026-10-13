@@ -3,7 +3,7 @@ name: wf-ecom-ops-price-patrol
 description: >-
   多平台铺货与库存同步 的「竞品价格巡检」工作流：竞品链接→价格/促销→异动提醒。触发方式：定时（每日）。
   当用户要完成「竞品价格巡检」这件事、或触发了上述条件时使用。
-license: Proprietary
+license: Apache-2.0
 compatibility: >-
   需要能读取工作区文件；若环境支持执行代码，将额外启用 scripts/ 下的确定性脚本路径。
   跨 WorkBuddy / ChatGPT / DeepSeek Harness / Kimi Work / 豆包工作。

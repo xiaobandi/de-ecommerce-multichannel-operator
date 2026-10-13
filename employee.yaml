@@ -16,7 +16,7 @@ metadata:
   - GitHub
   - Dify Marketplace（DAG 编排天然契合）
   - 淘宝（"铺货模板+映射表"SKU）
-  license: Proprietary
+  license: Apache-2.0
   version: 1.0.0
 spec:
   positioning: 多平台运营助理·小铺 ｜ 一人店的"轻量 ERP"，只做真正用的 20% 功能
